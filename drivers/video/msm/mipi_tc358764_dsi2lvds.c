@@ -240,7 +240,9 @@ static struct msm_panel_common_pdata *d2l_common_pdata;
 struct msm_fb_data_type *d2l_mfd;
 static struct dsi_buf d2l_tx_buf;
 static struct dsi_buf d2l_rx_buf;
+#if !defined(CONFIG_FB_MSM_MIPI_SAMSUNG_TFT_VIDEO_WSVGA_PT_PANEL)
 static struct pwm_device *bl_pwm;
+#endif
 static int initial_powerseq;
 
 static int bl_level;
@@ -510,7 +512,7 @@ static int mipi_d2l_dsi_init_sequence(struct msm_fb_data_type *mfd)
 	return 0;
 }
 
-#if defined(CONFIG_FB_MSM_MIPI_SAMSUNG_TFT_VIDEO_WSVGA_PT_PANEL)
+#if !defined(CONFIG_FB_MSM_MIPI_SAMSUNG_TFT_VIDEO_WSVGA_PT_PANEL)
 static int scale_pwm_dutycycle(int level)
 {
 
@@ -554,6 +556,7 @@ static int scale_pwm_dutycycle(int level)
  *
  * @return int
  */
+#if !defined(CONFIG_FB_MSM_MIPI_SAMSUNG_TFT_VIDEO_WSVGA_PT_PANEL)
 static int mipi_d2l_set_backlight_level(struct pwm_device *pwm, int level)
 {
 	int ret = 0;
@@ -591,7 +594,7 @@ static int mipi_d2l_set_backlight_level(struct pwm_device *pwm, int level)
 
 	return 0;
 }
-
+#endif
 
 
 
